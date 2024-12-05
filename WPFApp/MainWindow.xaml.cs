@@ -21,9 +21,18 @@ public partial class MainWindow : Window
         {
             MessageBox.Show("Ejecutando una tarea en un método anínimo");
         }
-        );  
+        );
+
+        Task T3 = new Task(
+           () => ShowMessage());
+
+
+        Task T4 = new Task(() => MessageBox.Show("Ejecutando la tarea 4"));
+                        
         
     }
+
+    
 
         void ShowMessage()
         {
