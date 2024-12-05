@@ -12,6 +12,12 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
+    void AddMessage(string message)
+    {
+        Messages.Content +=
+                $"Mensaje: {message}, " +
+                $"Hilo actual: {Thread.CurrentThread.ManagedThreadId}\n";
+    }
     void CreateTask()
     {
         Task T;
@@ -37,7 +43,11 @@ public partial class MainWindow : Window
         }
         );
 
+        Task T6 = new Task((message) =>
+        MessageBox.Show(message.ToString()), "Expresión lambda con parámetros");
 
+        Task T7 = new Task(() => AddMessage("Ejecutando la tarea."));
+        T7.Start();
     }
 
         void ShowMessage()
