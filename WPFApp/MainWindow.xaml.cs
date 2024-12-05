@@ -10,13 +10,18 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        CreateTask();
     }
 
     void AddMessage(string message)
     {
-        Messages.Content +=
-                $"Mensaje: {message}, " +
-                $"Hilo actual: {Thread.CurrentThread.ManagedThreadId}\n";
+        int CurrenThreadId = Thread.CurrentThread.ManagedThreadId;
+        this.Dispatcher.Invoke(() =>
+        {
+            Messages.Content +=
+                    $"Mensaje: {message}, " +
+                    $"Hilo actual: {CurrenThreadId}\n";
+        });
     }
     void CreateTask()
     {
@@ -48,6 +53,7 @@ public partial class MainWindow : Window
 
         Task T7 = new Task(() => AddMessage("Ejecutando la tarea."));
         T7.Start();
+        AddMessage("En hilo principal");
     }
 
         void ShowMessage()
